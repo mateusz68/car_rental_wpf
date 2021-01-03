@@ -1,0 +1,36 @@
+﻿<Window x:Class="kck_projekt.Wpf.Register"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kck_projekt.Wpf"
+             mc:Ignorable="d"
+            Title="Rejestracja" SizeToContent="Height" Width="400">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" Margin="5">Login:</Label>
+            <TextBox Name="loginTextBox" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
+            <Label Grid.Row="1" Grid.Column="0" Margin="5">Hasło:</Label>
+            <PasswordBox Name="passwordBox" Grid.Row="1" Grid.Column="1" Margin="5"></PasswordBox>
+            <Label Grid.Row="2" Grid.Column="0" Margin="5">Powtórz hasło:</Label>
+            <PasswordBox Name="repeatPasswordBox" Grid.Row="2" Grid.Column="1" Margin="5"></PasswordBox>
+            <Label Grid.Row="3" Grid.Column="0" Margin="5">Adres email:</Label>
+            <TextBox Name="emailTextBox" Grid.Row="3" Grid.Column="1" Margin="5"></TextBox>
+        </Grid>
+        <WrapPanel HorizontalAlignment="Center" Margin="5">
+            <Button Padding="10,5" Margin="0,0,5,0">Zarejestruj</Button>
+            <Button Padding="10,5" Click="closeWindow">Anuluj</Button>
+        </WrapPanel>
+    </StackPanel>
+</Window>
