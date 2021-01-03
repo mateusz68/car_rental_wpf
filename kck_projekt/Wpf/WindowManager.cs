@@ -13,12 +13,12 @@ namespace kck_projekt.Wpf
         public static Application WinApp { get; private set; }
         public static Window MainWindow { get; private set; }
         public Controller.AppController MyController { get; set; }
+        private Window currentWindow;
         private Model.User user;
         private List<Model.CarModel> models;
         private List<Model.CarMark> marks;
         private List<Model.Car> cars;
         private List<Model.Car> avaliableCars;
-        private Controller.AppController appController;
         public WindowManager()
         {
             InitializeWindows();
@@ -26,14 +26,14 @@ namespace kck_projekt.Wpf
         static void InitializeWindows()
         {
             WinApp = new Application();
-            
+            WinApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            //WinApp = new App();
         }
 
         [STAThread]
         public void start()
         {
-            System.Windows.Application app = new System.Windows.Application();
-            app.Run(new Login());
+            //System.Windows.Application app = new System.Windows.Application();
         }
 
         public void SetController(Controller.AppController controller)
@@ -56,18 +56,20 @@ namespace kck_projekt.Wpf
 
         public void ShowLogin()
         {
-            /*WinApp.Run(MainWindow = new Login());*/ // note: blocking call
-            WinApp.Run(MainWindow = new StaffMenu());
+            currentWindow = new Login(MyController);
+            //currentWindow.Show();
+
+            WinApp.Run(currentWindow);
         }
 
         public void CloseWindow()
         {
-            throw new NotImplementedException();
+            currentWindow.Hide();
         }
 
         public void ShowMessage(string text)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(text, "Uwaga");
         }
 
         public void ShowMenu()
@@ -77,7 +79,8 @@ namespace kck_projekt.Wpf
 
         public void ShowRegistration()
         {
-            throw new NotImplementedException();
+            currentWindow = new Register(MyController);
+            WinApp.Run(currentWindow);
         }
 
         public void ShowMainMenu()
@@ -87,7 +90,17 @@ namespace kck_projekt.Wpf
 
         public void ShowStaffMenu()
         {
-            throw new NotImplementedException();
+            
+            if(currentWindow == null)
+            {
+                currentWindow = new StaffMenu(MyController);
+                WinApp.Run(currentWindow);
+            }
+            else
+            {
+                currentWindow = new StaffMenu(MyController);
+                currentWindow.Show();
+            }
         }
     }
 }

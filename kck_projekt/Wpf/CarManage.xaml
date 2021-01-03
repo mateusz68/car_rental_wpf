@@ -3,10 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:modelAlias="clr-namespace:kck_projekt.Model"
              xmlns:local="clr-namespace:kck_projekt.Wpf"
              mc:Ignorable="d" 
+             Loaded="Window_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Blue">
-            
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="statusFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelAlias:CarStatus"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="engineFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelAlias:CarEngineType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="gearboxFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelAlias:CarGearBoxType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <local:EnumDescriptionConverter x:Key="enumDescriptionConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Margin="3" Name="carList" SelectionMode="Single" SelectionChanged="carSelectionChanged">
+        </ListBox>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Column="2">
+            <Grid DataContext="{Binding ElementName=carList, Path=SelectedItem}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Margin="5">Numer Rejestracyjny:</Label>
+                <TextBox Name="CarRegNumb" Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=CarRegNumb}" />
+                <Label Grid.Row="1" Grid.Column="0" Margin="5">Kolor:</Label>
+                <TextBox Name="Color" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=CarColor}" />
+                <Label Grid.Row="2" Grid.Column="0" Margin="5">Moc:</Label>
+                <TextBox Name="CarPower" Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Path=CarPower}" />
+                <Label Grid.Row="3" Grid.Column="0" Margin="5">Stawka dzienna:</Label>
+                <TextBox Name="CarDayPrince" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Path=CarDayPrince}" />
+                <Label Grid.Row="4" Grid.Column="0" Margin="5">Kaucja:</Label>
+                <TextBox Name="CarBail" Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Path=CarBail}" />
+
+                <Label Grid.Row="5" Grid.Column="0" Margin="5">Status</Label>
+                <ComboBox Name="StatusCombo" Grid.Row="5" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding Path=Status}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                    <Label Grid.Row="6" Grid.Column="0" Margin="5">Silnik</Label>
+                <ComboBox Name="EngineCombo" Grid.Row="6" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource engineFromEnum}}" SelectedItem="{Binding Path=Engine}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                    <Label Grid.Row="7" Grid.Column="0" Margin="5">Skrzynia</Label>
+                <ComboBox Name="GearBoxCombo" Grid.Row="7" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource gearboxFromEnum}}" SelectedItem="{Binding Path=Gearbox}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Grid.Row="8" Grid.Column="0" Margin="5">Model</Label>
+                <ComboBox Name="ModelCombo" Grid.Row="8" Grid.Column="1" Margin="5" SelectedItem="{Binding Path=Model}"/>
+            </Grid>
+            <StackPanel Grid.Row="2">
+                <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>
+                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5" Padding="5,10">Usuń</Button>
+                <Button Name="addButton" Click="addBtnClicked" Margin="5" Padding="5,10">Dodaj</Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

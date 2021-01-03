@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,16 +26,42 @@ namespace kck_projekt.Wpf
     {
         private CarManage carManage;
         private ReserwationManage reserwationManage;
-        public StaffMenu()
+        public Controller.AppController MyController { get; set; }
+        public List<Model.Car> CarsList { get; set; }
+        public List<Model.CarMark> CarMarkList { get; set; }
+        public List<Model.CarModel> CarModelList { get; set; }
+        public List<Model.User> UserList { get; set; }
+        public List<Model.Reservation> ReservationsList { get; set; }
+        public ObservableCollection<Model.Reservation> observableReservation;
+        public StaffMenu(Controller.AppController MyController)
         {
             InitializeComponent();
+            this.MyController = MyController;
+            loadData();
+        }
+
+        public void loadData()
+        {
+            CarsList = MyController.manageCars.GetCarList();
+            CarMarkList = MyController.manageCars.GetMarkList();
+            CarModelList = MyController.manageCars.GetModelsList();
+            UserList = MyController.manageUser.GetUserList();
+            ReservationsList = MyController.manageReservation.GetReservationList();
+            observableReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
+
+        }
+
+        public void updateReservationList()
+        {
+            observableReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
+            ReservationsList = MyController.manageReservation.GetReservationList();
         }
 
         private void ReservationsButtonClicked(object sender, RoutedEventArgs e)
         {
             if(reserwationManage == null)
             {
-                reserwationManage = new ReserwationManage();
+                reserwationManage = new ReserwationManage(MyController, this);
             }
             contentControl.Content = reserwationManage;
         }
@@ -40,7 +70,7 @@ namespace kck_projekt.Wpf
         {
             if(carManage == null)
             {
-                carManage = new CarManage();
+                carManage = new CarManage(MyController, this);
             }
             contentControl.Content = carManage;
         }
@@ -54,5 +84,6 @@ namespace kck_projekt.Wpf
         {
 
         }
+
     }
 }

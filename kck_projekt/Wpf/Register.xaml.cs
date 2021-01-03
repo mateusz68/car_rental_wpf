@@ -20,9 +20,11 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class Register : Window
     {
-        public Register()
+        public Controller.AppController MyController { get; set; }
+        public Register(Controller.AppController MyController)
         {
             InitializeComponent();
+            this.MyController = MyController;
         }
 
         private void closeWindow(object sender, RoutedEventArgs e)

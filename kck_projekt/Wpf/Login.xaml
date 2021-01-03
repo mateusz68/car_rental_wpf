@@ -15,14 +15,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Margin="5">Login:</Label>
             <TextBox Name="emailTextBox" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
             <Label Grid.Row="1" Grid.Column="0" Margin="5">Hasło:</Label>
             <PasswordBox Name="passwordBox" Grid.Row="1" Grid.Column="1" Margin="5"></PasswordBox>
+            <CheckBox Name="rememberCheckBox" Grid.Row="2" Grid.Column="0" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Row="2" Grid.Column="1" Margin="5">Zapamiętaj</Label>
         </Grid>
         <WrapPanel HorizontalAlignment="Center" Margin="5">
-            <Button Padding="10,5">Zaloguj</Button>
+            <Button Padding="10,5" Click="loginButtonClicked">Zaloguj</Button>
             <Button Padding="10,5" Margin="5,0,5,0" Click="openRegisterWindow">Rejestracja</Button>
             <Button Padding="10,5" Click="closeWindow">Wyjdź</Button>
         </WrapPanel>

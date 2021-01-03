@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +72,6 @@ namespace kck_projekt.Controller
                 .FirstOrDefault();
             if (temp == null)
             {
-                
                 TimeSpan diff = reservationData.DateTo - reservationData.DateFrom;
                 double timeDiffDouble = Math.Abs(diff.TotalDays);
                 timeDiffDouble = Math.Round(timeDiffDouble, MidpointRounding.AwayFromZero);

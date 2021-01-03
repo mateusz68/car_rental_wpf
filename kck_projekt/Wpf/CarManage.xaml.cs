@@ -20,9 +20,39 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class CarManage : UserControl
     {
-        public CarManage()
+        public Controller.AppController MyController { get; set; }
+        public StaffMenu staffMenu;
+        public CarManage(Controller.AppController MyController, StaffMenu staffMenu)
         {
             InitializeComponent();
+            this.MyController = MyController;
+            this.staffMenu = staffMenu;
+        }
+
+        private void saveBtnClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteBtnclicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addBtnClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void carSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            carList.ItemsSource = staffMenu.CarsList;
+            ModelCombo.ItemsSource = staffMenu.CarModelList;
         }
     }
 }

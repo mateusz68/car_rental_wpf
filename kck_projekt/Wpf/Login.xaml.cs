@@ -20,20 +20,35 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        public Controller.AppController MyController { get; set; }
+        public Login(Controller.AppController MyController)
         {
             InitializeComponent();
+            this.MyController = MyController;
         }
 
         private void openRegisterWindow(object sender, RoutedEventArgs e)
         {
-            Register registerWindow = new Register();
+            Register registerWindow = new Register(MyController);
             registerWindow.ShowDialog();
         }
 
         private void closeWindow(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void loginButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)rememberCheckBox.IsChecked)
+            {
+                MyController.LoginUser(emailTextBox.Text.ToString(), passwordBox.Password.ToString(), true);
+            }
+            else
+            {
+                MyController.LoginUser(emailTextBox.Text.ToString(), passwordBox.Password.ToString(), false);
+            }
+            
         }
     }
 }
