@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="kck_projekt.Wpf.UserManage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kck_projekt.Wpf"
+             xmlns:modelAlias="clr-namespace:kck_projekt.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             Loaded="Window_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="roleFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelAlias:UserRole"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <local:EnumDescriptionConverter x:Key="enumDescriptionConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Margin="3" Name="userList" SelectionMode="Single" SelectionChanged="userSelectionChanged" ItemsSource="{Binding ObservableUsers, UpdateSourceTrigger=PropertyChanged}">
+        </ListBox>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Column="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5">Nazwa Użytkownika:</Label>
+                <TextBox Name="userName" Grid.Row="0" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.UserName"
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="5">Hasło:</Label>
+                <PasswordBox Name="UserPassword" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Margin="5">Email:</Label>
+                <TextBox Name="userEmail" Grid.Row="2" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Email" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="3" Grid.Column="0" Margin="5">Imię:</Label>
+                <TextBox Name="NameTextBox" Grid.Row="3" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Name" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="4" Grid.Column="0" Margin="5">Nazwisko:</Label>
+                <TextBox Name="userSurname" Grid.Row="4" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Surname " 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+                <Label Grid.Row="5" Grid.Column="0" Margin="5">Ulica:</Label>
+                <TextBox Name="userAdres1" Grid.Row="5" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Adres1" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="6" Grid.Column="0" Margin="5">Miejscowość:</Label>
+                <TextBox Name="userAdres2" Grid.Row="6" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Adres2" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="7" Grid.Column="0" Margin="5">Kod Pocztowy:</Label>
+                <TextBox Name="userAdres3" Grid.Row="7" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Adres3" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="8" Grid.Column="0" Margin="5">Numer Telefonu:</Label>
+                <TextBox Name="userPhone" Grid.Row="8" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Phone" 
+                                 ElementName="userList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                                <local:NumberValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="9" Grid.Column="0" Margin="5">Rola</Label>
+                <ComboBox Name="rolaCombo" Grid.Row="9" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource roleFromEnum}}" SelectedItem="{Binding Path=SelectedItem.Rola, ElementName=userList}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+            </Grid>
+            <StackPanel Grid.Row="2">
+                <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="2,5">Zapisz</Button>
+                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5" Padding="2,5">Usuń</Button>
+                <Button Name="addButton" Click="addBtnClicked" Margin="5" Padding="2,5">Dodaj</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

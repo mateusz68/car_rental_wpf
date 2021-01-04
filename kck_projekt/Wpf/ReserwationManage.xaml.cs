@@ -64,7 +64,6 @@ namespace kck_projekt.Wpf
             Model.Reservation tempReservation = staffMenu.ObservableReservations[reservationList.SelectedIndex];
             MyController.manageReservation.SaveReservation(tempReservation, tempReservation.ReservationId);
             staffMenu.updateReservationList();
-            reservationList.SelectedIndex = -1;
         }
 
         private void deleteBtnclicked(object sender, RoutedEventArgs e)
@@ -73,7 +72,7 @@ namespace kck_projekt.Wpf
             {
                 Model.Reservation tempReservation = staffMenu.ObservableReservations[reservationList.SelectedIndex];
                 staffMenu.ObservableReservations.Remove(tempReservation);
-                MyController.manageReservation.DeleteReservation(tempReservation.ReservationId);
+                //MyController.manageReservation.DeleteReservation(tempReservation.ReservationId);
             }
             
         }
@@ -94,7 +93,6 @@ namespace kck_projekt.Wpf
                 User = staffMenu.ObservableUsers[UserCombo.SelectedIndex]
             };
             MyController.manageReservation.AddReservation(tempReservation);
-            reservationList.SelectedIndex = -1;
             staffMenu.updateReservationList();
         }
 

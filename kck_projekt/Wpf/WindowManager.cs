@@ -14,7 +14,7 @@ namespace kck_projekt.Wpf
         public static Window MainWindow { get; private set; }
         public Controller.AppController MyController { get; set; }
         private Window currentWindow;
-        private Model.User user;
+        public Model.User user;
         private List<Model.CarModel> models;
         private List<Model.CarMark> marks;
         private List<Model.Car> cars;

@@ -4,9 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:kck_projekt.Wpf"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Loaded="Window_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox Margin="3" Name="carModelList" SelectionMode="Single" SelectionChanged="carModelSelectionChanged" ItemsSource="{Binding ObservableCarModel, UpdateSourceTrigger=PropertyChanged}">
+        </ListBox>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Column="2">
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5">Nazwa:</Label>
+                <TextBox Name="ModelName" Grid.Row="0" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.ModelName"
+                                 ElementName="carModelList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="5">Marka</Label>
+                <ComboBox Name="MarkCombo" Grid.Row="1" Grid.Column="1" Margin="5" ItemsSource="{Binding ObservableCarMark, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding ElementName=carModelList, Path=SelectedItem.Mark}"/>
+
+            </Grid>
+            <StackPanel Grid.Row="2">
+                <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>
+                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5" Padding="5,10">Usuń</Button>
+                <Button Name="addButton" Click="addBtnClicked" Margin="5" Padding="5,10">Dodaj</Button>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </UserControl>

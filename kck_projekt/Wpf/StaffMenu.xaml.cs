@@ -27,6 +27,8 @@ namespace kck_projekt.Wpf
         private CarManage carManage;
         private ReserwationManage reserwationManage;
         private CarMarkManage carMarkManage;
+        private CarModelManage carModelManage;
+        private UserManage userManage;
         public Controller.AppController MyController { get; set; }
         public Wpf.WindowManager windowManager { get; set; }
 
@@ -100,6 +102,10 @@ namespace kck_projekt.Wpf
             this.MyController = MyController;
             loadData();
             this.windowManager = windowManager;
+            if(windowManager.user.Rola == Model.UserRole.Admin)
+            {
+                userButton.IsEnabled = true;
+            }
         }
 
         #region update and load data
@@ -174,8 +180,20 @@ namespace kck_projekt.Wpf
 
         private void ModelsButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            if (carModelManage == null)
+            {
+                carModelManage = new CarModelManage(MyController, this);
+            }
+            contentControl.Content = carModelManage;
         }
 
+        private void UserButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (userManage == null)
+            {
+                userManage = new UserManage(MyController, this);
+            }
+            contentControl.Content = userManage;
+        }
     }
 }

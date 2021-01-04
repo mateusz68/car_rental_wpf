@@ -18,6 +18,7 @@
             <Button Padding="10,5" Margin="5" Click="CarsButtonClicked" >Samochody</Button>
             <Button Padding="10,5" Margin="5" Click="MarksButtonCliced" >Marki</Button>
             <Button Padding="10,5" Margin="5" Click="ModelsButtonClicked" >Modele</Button>
+            <Button Name="userButton" IsEnabled="False" Padding="10,5" Margin="5" Click="UserButtonClicked" >Użytkownicy</Button>
         </StackPanel>
         
         <ContentControl Grid.Column="1" x:Name="contentControl"></ContentControl>
