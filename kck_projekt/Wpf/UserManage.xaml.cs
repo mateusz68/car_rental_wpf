@@ -103,7 +103,6 @@ namespace kck_projekt.Wpf
                 Adres3 = userAdres3.Text,
                 Phone = phoneNumber,
                 Rola = (Model.UserRole)rolaCombo.SelectedIndex,
-            
             };
             if (UserPassword.Password != "")
             {

@@ -181,6 +181,9 @@
     <Compile Include="View\UserManageWindow.cs" />
     <Compile Include="View\UserReservationListWindow.cs" />
     <Compile Include="View\UserSettingsWindow.cs" />
+    <Compile Include="Wpf\AppSettings.xaml.cs">
+      <DependentUpon>AppSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\CarManage.xaml.cs">
       <DependentUpon>CarManage.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\AppSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wpf\CarManage.xaml">
       <SubType>Designer</SubType>

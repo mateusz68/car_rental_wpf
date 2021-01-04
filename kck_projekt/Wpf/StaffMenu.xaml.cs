@@ -29,6 +29,7 @@ namespace kck_projekt.Wpf
         private CarMarkManage carMarkManage;
         private CarModelManage carModelManage;
         private UserManage userManage;
+        private AppSettings appSettings;
         public Controller.AppController MyController { get; set; }
         public Wpf.WindowManager windowManager { get; set; }
 
@@ -194,6 +195,15 @@ namespace kck_projekt.Wpf
                 userManage = new UserManage(MyController, this);
             }
             contentControl.Content = userManage;
+        }
+
+        private void AppSetingsClicked(object sender, RoutedEventArgs e)
+        {
+            if (appSettings == null)
+            {
+                appSettings = new AppSettings(MyController);
+            }
+            contentControl.Content = appSettings;
         }
     }
 }
