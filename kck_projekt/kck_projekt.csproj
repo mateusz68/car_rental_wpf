@@ -184,6 +184,12 @@
     <Compile Include="Wpf\CarManage.xaml.cs">
       <DependentUpon>CarManage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\CarMarkManage.xaml.cs">
+      <DependentUpon>CarMarkManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\CarModelManage.xaml.cs">
+      <DependentUpon>CarModelManage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\HelpMethod.cs" />
     <Compile Include="Wpf\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -197,6 +203,7 @@
     <Compile Include="Wpf\StaffMenu.xaml.cs">
       <DependentUpon>StaffMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\ValidationRules.cs" />
     <Compile Include="Wpf\WindowManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +231,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Wpf\CarManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\CarMarkManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\CarModelManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

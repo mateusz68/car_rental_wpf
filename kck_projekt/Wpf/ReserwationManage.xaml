@@ -26,13 +26,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged">
+        <ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
         </ListBox>
         
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 
         <StackPanel Grid.Column="2">
-            <Grid DataContext="{Binding ElementName=reservationList, Path=SelectedItem}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
@@ -49,25 +49,37 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Margin="5">Data od:</Label>
-                <wpfTool:DateTimePicker Grid.Column="1" Grid.Row="0" Name="dateFrom" Margin="5" Value="{Binding Path=DateFrom}"/>
+                <wpfTool:DateTimePicker Grid.Column="1" Grid.Row="0" Name="dateFrom" Margin="5" Value="{Binding ElementName=reservationList, Path=SelectedItem.DateFrom}"/>
                 <Label Grid.Row="1" Grid.Column="0" Margin="5">Data dd:</Label>
-                <wpfTool:DateTimePicker Grid.Column="1" Grid.Row="1" Name="dateTo" Margin="5" Value="{Binding Path=DateTo}"/>
+                <wpfTool:DateTimePicker Grid.Column="1" Grid.Row="1" Name="dateTo" Margin="5" Value="{Binding ElementName=reservationList, Path=SelectedItem.DateTo}"/>
                 <Label Grid.Row="2" Grid.Column="0" Margin="5">Uwagi</Label>
-                <TextBox Name="Comments" Grid.Row="2" Grid.Column="1" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" MinLines="5" Text="{Binding Path=Comments}"/>
+                <TextBox Name="Comments" Grid.Row="2" Grid.Column="1" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" MinLines="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.Comments"
+                                 ElementName="reservationList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Label Grid.Row="3" Grid.Column="0" Margin="5">Koszt</Label>
-                <TextBox Name="Cost" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Path=Cost}" IsReadOnly="True" />
+                <TextBox Name="Cost" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ElementName=reservationList, Path=SelectedItem.Cost}" IsReadOnly="True" />
                 <Label Grid.Row="4" Grid.Column="0" Margin="5">Status</Label>
-                <ComboBox Name="StatusCombo" Grid.Row="4" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding Path=Status}">
+                <ComboBox Name="StatusCombo" Grid.Row="4" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding ElementName=reservationList, Path=SelectedItem.Status}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                
                 <Label Grid.Row="5" Grid.Column="0" Margin="5">Użytkownik</Label>
-                <ComboBox Name="UserCombo" Grid.Row="5" Grid.Column="1" Margin="5" SelectedItem="{Binding Path=User}"/>
+                <ComboBox Name="UserCombo" Grid.Row="5" Grid.Column="1" Margin="5"  ItemsSource="{Binding ObservableUsers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ElementName=reservationList, Path=SelectedItem.User}"/>
+
                 <Label Grid.Row="6" Grid.Column="0" Margin="5">Samochód</Label>
-                <ComboBox Name="CarCombo" Grid.Row="6" Grid.Column="1" Margin="5" SelectedItem="{Binding Path=Car}"/>
+                <ComboBox Name="CarCombo" Grid.Row="6" Grid.Column="1" Margin="5" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding ElementName=reservationList, Path=SelectedItem.Car}"/>
+            
             </Grid>
             <StackPanel Grid.Row="2">
                 <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>

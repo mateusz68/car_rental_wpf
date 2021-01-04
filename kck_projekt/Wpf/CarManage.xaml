@@ -37,13 +37,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="3" Name="carList" SelectionMode="Single" SelectionChanged="carSelectionChanged">
+        <ListBox Margin="3" Name="carList" SelectionMode="Single" SelectionChanged="carSelectionChanged" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}">
         </ListBox>
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 
         <StackPanel Grid.Column="2">
-            <Grid DataContext="{Binding ElementName=carList, Path=SelectedItem}">
+            <!--<Grid DataContext="{Binding ElementName=carList, Path=SelectedItem}">-->
+                <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
@@ -60,19 +61,72 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
                 <Label Grid.Row="0" Grid.Column="0" Margin="5">Numer Rejestracyjny:</Label>
-                <TextBox Name="CarRegNumb" Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=CarRegNumb}" />
+                <TextBox Name="CarRegNumb" Grid.Row="0" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.CarRegNumb"
+                                 ElementName="carList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                
                 <Label Grid.Row="1" Grid.Column="0" Margin="5">Kolor:</Label>
-                <TextBox Name="Color" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=CarColor}" />
+                <TextBox Name="Color" Grid.Row="1" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.CarColor" 
+                                 ElementName="carList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                
                 <Label Grid.Row="2" Grid.Column="0" Margin="5">Moc:</Label>
-                <TextBox Name="CarPower" Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Path=CarPower}" />
+                <TextBox Name="CarPower" Grid.Row="2" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.CarPower" 
+                                 ElementName="carList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                                <local:NumberValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                
                 <Label Grid.Row="3" Grid.Column="0" Margin="5">Stawka dzienna:</Label>
-                <TextBox Name="CarDayPrince" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Path=CarDayPrince}" />
+                <TextBox Name="CarDayPrince" Grid.Row="3" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.CarDayPrince" 
+                                 ElementName="carList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                                <local:DecimalValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                
                 <Label Grid.Row="4" Grid.Column="0" Margin="5">Kaucja:</Label>
-                <TextBox Name="CarBail" Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Path=CarBail}" />
+                <TextBox Name="CarBail" Grid.Row="4" Grid.Column="1" Margin="5">
+                    <TextBox.Text>
+                        <Binding Path="SelectedItem.CarBail" 
+                                 ElementName="carList">
+                            <Binding.ValidationRules>
+                                <local:EmptyStringValidationRule />
+                                <local:DecimalValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
                 <Label Grid.Row="5" Grid.Column="0" Margin="5">Status</Label>
-                <ComboBox Name="StatusCombo" Grid.Row="5" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding Path=Status}">
+                <ComboBox Name="StatusCombo" Grid.Row="5" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding Path=SelectedItem.Status, ElementName=carList}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
@@ -80,7 +134,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                     <Label Grid.Row="6" Grid.Column="0" Margin="5">Silnik</Label>
-                <ComboBox Name="EngineCombo" Grid.Row="6" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource engineFromEnum}}" SelectedItem="{Binding Path=Engine}">
+                <ComboBox Name="EngineCombo" Grid.Row="6" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource engineFromEnum}}" SelectedItem="{Binding Path=SelectedItem.Engine, ElementName=carList}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
@@ -88,7 +142,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                     <Label Grid.Row="7" Grid.Column="0" Margin="5">Skrzynia</Label>
-                <ComboBox Name="GearBoxCombo" Grid.Row="7" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource gearboxFromEnum}}" SelectedItem="{Binding Path=Gearbox}">
+                <ComboBox Name="GearBoxCombo" Grid.Row="7" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource gearboxFromEnum}}" SelectedItem="{Binding Path=SelectedItem.Gearbox, ElementName=carList}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
@@ -96,7 +150,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Grid.Row="8" Grid.Column="0" Margin="5">Model</Label>
-                <ComboBox Name="ModelCombo" Grid.Row="8" Grid.Column="1" Margin="5" SelectedItem="{Binding Path=Model}"/>
+                <ComboBox Name="ModelCombo" Grid.Row="8" Grid.Column="1" Margin="5" ItemsSource="{Binding ObservableCarModel, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedItem.Model, ElementName=carList}" />
+      
             </Grid>
             <StackPanel Grid.Row="2">
                 <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>

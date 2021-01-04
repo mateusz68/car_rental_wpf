@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:kck_projekt.Wpf"
              mc:Ignorable="d" 
              Title="Menu" Height="500" Width="800">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>

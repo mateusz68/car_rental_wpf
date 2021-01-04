@@ -93,12 +93,12 @@ namespace kck_projekt.Wpf
             
             if(currentWindow == null)
             {
-                currentWindow = new StaffMenu(MyController);
+                currentWindow = new StaffMenu(MyController, this);
                 WinApp.Run(currentWindow);
             }
             else
             {
-                currentWindow = new StaffMenu(MyController);
+                currentWindow = new StaffMenu(MyController, this);
                 currentWindow.Show();
             }
         }

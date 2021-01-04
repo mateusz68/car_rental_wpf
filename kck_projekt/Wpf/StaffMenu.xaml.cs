@@ -22,44 +22,132 @@ namespace kck_projekt.Wpf
     /// <summary>
     /// Logika interakcji dla klasy StaffMenu.xaml
     /// </summary>
-    public partial class StaffMenu : Window
+    public partial class StaffMenu : Window, INotifyPropertyChanged
     {
         private CarManage carManage;
         private ReserwationManage reserwationManage;
+        private CarMarkManage carMarkManage;
         public Controller.AppController MyController { get; set; }
-        public List<Model.Car> CarsList { get; set; }
-        public List<Model.CarMark> CarMarkList { get; set; }
-        public List<Model.CarModel> CarModelList { get; set; }
-        public List<Model.User> UserList { get; set; }
-        public List<Model.Reservation> ReservationsList { get; set; }
-        public ObservableCollection<Model.Reservation> observableReservation;
-        public StaffMenu(Controller.AppController MyController)
+        public Wpf.WindowManager windowManager { get; set; }
+
+        #region define observable collections
+        private ObservableCollection<Model.Reservation> observableReservations;
+        public ObservableCollection<Model.Reservation> ObservableReservations
         {
-            InitializeComponent();
-            this.MyController = MyController;
-            loadData();
+            get { return observableReservations; }
+            set
+            {
+                observableReservations = value;
+                NotifyPropertyChanged("ObservableReservations");
+            }
+        }
+        private ObservableCollection<Model.Car> observableCar;
+        public ObservableCollection<Model.Car> ObservableCar
+        {
+            get { return observableCar; }
+            set
+            {
+                observableCar = value;
+                NotifyPropertyChanged("ObservableCar");
+            }
+        }
+        private ObservableCollection<Model.CarModel> observableCarModel;
+        public ObservableCollection<Model.CarModel> ObservableCarModel
+        {
+            get { return observableCarModel; }
+            set
+            {
+                observableCarModel = value;
+                NotifyPropertyChanged("ObservableCarModel");
+            }
         }
 
+        private ObservableCollection<Model.CarMark> observableCarMark;
+        public ObservableCollection<Model.CarMark> ObservableCarMark
+        {
+            get { return observableCarMark; }
+            set
+            {
+                observableCarMark = value;
+                NotifyPropertyChanged("ObservableCarMark");
+            }
+        }
+
+        private ObservableCollection<Model.User> observableUsers;
+        public ObservableCollection<Model.User> ObservableUsers
+        {
+            get { return observableUsers; }
+            set
+            {
+                observableUsers = value;
+                NotifyPropertyChanged("ObservableUsers");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        #endregion
+        public StaffMenu(Controller.AppController MyController, Wpf.WindowManager windowManager)
+        {
+            InitializeComponent();
+            DataContext = this;
+            this.MyController = MyController;
+            loadData();
+            this.windowManager = windowManager;
+        }
+
+        #region update and load data
         public void loadData()
         {
-            CarsList = MyController.manageCars.GetCarList();
-            CarMarkList = MyController.manageCars.GetMarkList();
-            CarModelList = MyController.manageCars.GetModelsList();
-            UserList = MyController.manageUser.GetUserList();
-            ReservationsList = MyController.manageReservation.GetReservationList();
-            observableReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
+            ObservableCar = new ObservableCollection<Model.Car>(MyController.manageCars.GetCarList());
+            ObservableCarModel = new ObservableCollection<Model.CarModel>(MyController.manageCars.GetModelsList());
+            ObservableCarMark = new ObservableCollection<Model.CarMark>(MyController.manageCars.GetMarkList());
+            ObservableReservations = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
+            ObservableUsers = new ObservableCollection<Model.User>(MyController.manageUser.GetUserList());
 
         }
 
         public void updateReservationList()
         {
-            observableReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
-            ReservationsList = MyController.manageReservation.GetReservationList();
+            observableReservations = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
         }
+
+        public void updateCarList()
+        {
+            ObservableCar = new ObservableCollection<Model.Car>(MyController.manageCars.GetCarList());
+        }
+
+        public void updateCarModel()
+        {
+            ObservableCarModel = new ObservableCollection<Model.CarModel>(MyController.manageCars.GetModelsList());
+        }
+
+        public void updateCarMark()
+        {
+            ObservableCarMark = new ObservableCollection<Model.CarMark>(MyController.manageCars.GetMarkList());
+        }
+
+        public void updateReservations()
+        {
+            ObservableReservations = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetReservationList());
+        }
+
+        public void updateUsers()
+        {
+            ObservableUsers = new ObservableCollection<Model.User>(MyController.manageUser.GetUserList());
+        }
+
+        #endregion
 
         private void ReservationsButtonClicked(object sender, RoutedEventArgs e)
         {
-            if(reserwationManage == null)
+            if (reserwationManage == null)
             {
                 reserwationManage = new ReserwationManage(MyController, this);
             }
@@ -68,7 +156,7 @@ namespace kck_projekt.Wpf
 
         private void CarsButtonClicked(object sender, RoutedEventArgs e)
         {
-            if(carManage == null)
+            if (carManage == null)
             {
                 carManage = new CarManage(MyController, this);
             }
@@ -77,7 +165,11 @@ namespace kck_projekt.Wpf
 
         private void MarksButtonCliced(object sender, RoutedEventArgs e)
         {
-
+            if (carMarkManage == null)
+            {
+                carMarkManage = new CarMarkManage(MyController, this);
+            }
+            contentControl.Content = carMarkManage;
         }
 
         private void ModelsButtonClicked(object sender, RoutedEventArgs e)
