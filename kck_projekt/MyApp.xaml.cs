@@ -11,7 +11,7 @@ namespace kck_projekt.Wpf
     /// <summary>
     /// Logika interakcji dla klasy App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class MyApp : Application
     {
     }
 }

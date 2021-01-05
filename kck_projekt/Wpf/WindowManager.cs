@@ -10,7 +10,7 @@ namespace kck_projekt.Wpf
 {
     public class WindowManager: ViewInterface
     {
-        public static Application WinApp { get; private set; }
+        public static MyApp WinApp { get; private set; }
         public static Window MainWindow { get; private set; }
         public Controller.AppController MyController { get; set; }
         private Window currentWindow;
@@ -25,9 +25,11 @@ namespace kck_projekt.Wpf
         }
         static void InitializeWindows()
         {
-            WinApp = new Application();
-            WinApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
-            //WinApp = new App();
+            //WinApp = new Application();
+            //WinApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            WinApp = new MyApp();
+            WinApp.InitializeComponent();
+            
         }
 
         [STAThread]
@@ -85,7 +87,16 @@ namespace kck_projekt.Wpf
 
         public void ShowMainMenu()
         {
-            throw new NotImplementedException();
+            if (currentWindow == null)
+            {
+                currentWindow = new UserMenu(MyController, this);
+                WinApp.Run(currentWindow);
+            }
+            else
+            {
+                currentWindow = new UserMenu(MyController, this);
+                currentWindow.Show();
+            }
         }
 
         public void ShowStaffMenu()

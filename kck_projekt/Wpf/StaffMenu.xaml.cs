@@ -99,9 +99,9 @@ namespace kck_projekt.Wpf
         public StaffMenu(Controller.AppController MyController, Wpf.WindowManager windowManager)
         {
             InitializeComponent();
-            DataContext = this;
             this.MyController = MyController;
             loadData();
+            DataContext = this;
             this.windowManager = windowManager;
             if(windowManager.user.Rola == Model.UserRole.Admin)
             {
@@ -204,6 +204,17 @@ namespace kck_projekt.Wpf
                 appSettings = new AppSettings(MyController);
             }
             contentControl.Content = appSettings;
+        }
+
+        private void LogoutClicked(object sender, RoutedEventArgs e)
+        {
+            MyController.Logout();
+            Application.Current.Shutdown();
+        }
+
+        private void ExitClicked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

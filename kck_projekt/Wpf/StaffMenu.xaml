@@ -5,7 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:kck_projekt.Wpf"
              mc:Ignorable="d" 
-             Title="Menu" Height="500" Width="800">
+             Title="Menu" Height="500" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -20,6 +27,8 @@
             <Button Padding="10,5" Margin="5" Click="ModelsButtonClicked" >Modele</Button>
             <Button Name="userButton" IsEnabled="False" Padding="10,5" Margin="5" Click="UserButtonClicked" >Użytkownicy</Button>
             <Button Padding="10,5" Margin="5" Click="AppSetingsClicked" >Ustawienia</Button>
+            <Button Padding="10,5" Margin="5" Click="LogoutClicked" >Wyloguj</Button>
+            <Button Padding="10,5" Margin="5" Click="ExitClicked" >Wyjdź</Button>
         </StackPanel>
         
         <ContentControl Grid.Column="1" x:Name="contentControl"></ContentControl>
