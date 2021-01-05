@@ -155,17 +155,5 @@ namespace kck_projekt.Wpf
             }
             return true;
         }
-
-        private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionViewSource.GetDefaultView(reservationList.ItemsSource).Refresh();
-        }
-        private bool UserFilter(object item)
-        {
-            if (String.IsNullOrEmpty(txtFilter.Text))
-                return true;
-            else
-                return ((item as Model.Reservation).Comments.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-        }
     }
 }

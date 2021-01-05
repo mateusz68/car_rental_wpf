@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:kck_projekt.Wpf"
              mc:Ignorable="d" 
-             Title="Menu" Height="500" Width="800"
+             Title="Menu" Height="600" Width="1080"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -13,24 +13,101 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid MouseDown="GridMouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" DockPanel.Dock="Left" x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1B3861">
+            <StackPanel>
+                <Grid Height="150" Background="Orange">
+                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF1368BD" SelectionChanged="ListViewMenu_SelectionChanged">
+                    <ListViewItem x:Name="ItemReservations" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FileDocumentEditOutline" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Rezerwacje" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemCars" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CarHatchback" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Samochody" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemMarks" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CarSettings" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Marki" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemModels" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CarMultiple" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="AppSetings" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemUsers" Height="60" IsEnabled="False">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountMultiple" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Użytkownicy" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="5">
-            <Label Margin="5" HorizontalAlignment="Center">Menu</Label>
-            <Button Padding="10,5" Margin="5" Click="ReservationsButtonClicked" >Rezerwacje</Button>
-            <Button Padding="10,5" Margin="5" Click="CarsButtonClicked" >Samochody</Button>
-            <Button Padding="10,5" Margin="5" Click="MarksButtonCliced" >Marki</Button>
-            <Button Padding="10,5" Margin="5" Click="ModelsButtonClicked" >Modele</Button>
-            <Button Name="userButton" IsEnabled="False" Padding="10,5" Margin="5" Click="UserButtonClicked" >Użytkownicy</Button>
-            <Button Padding="10,5" Margin="5" Click="AppSetingsClicked" >Ustawienia</Button>
-            <Button Padding="10,5" Margin="5" Click="LogoutClicked" >Wyloguj</Button>
-            <Button Padding="10,5" Margin="5" Click="ExitClicked" >Wyjdź</Button>
-        </StackPanel>
-        
-        <ContentControl Grid.Column="1" x:Name="contentControl"></ContentControl>
+            <Grid Grid.Row="0" Height="60" VerticalAlignment="Top" Background="#FF266EB6">
+                <TextBlock Text="Wypożyczalnia samochodów" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Name="userName" VerticalAlignment="Center" FontSize="18"/>
+                    <materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                        <StackPanel Width="150">
+                            <Button Content="Ustawienia" Click="SetingsButtonClick"/>
+                            <Separator/>
+                            <Button Content="Wyloguj" Click="LogoutButtonClick"/>
+                            <Button Content="Wyjdź" Click="ExitButtonClick"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+            
+            <ContentControl Grid.Row="1" x:Name="contentControl" />
+        </Grid>
     </Grid>
 </Window>

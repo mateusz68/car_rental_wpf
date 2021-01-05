@@ -103,10 +103,13 @@ namespace kck_projekt.Wpf
             loadData();
             DataContext = this;
             this.windowManager = windowManager;
-            if(windowManager.user.Rola == Model.UserRole.Admin)
+            userName.Text = windowManager.user.Name;
+            if (windowManager.user.Rola == Model.UserRole.Admin)
             {
-                userButton.IsEnabled = true;
+                //userButton.IsEnabled = true;
+                ItemUsers.IsEnabled = true;
             }
+
         }
 
         #region update and load data
@@ -152,59 +155,59 @@ namespace kck_projekt.Wpf
 
         #endregion
 
-        private void ReservationsButtonClicked(object sender, RoutedEventArgs e)
-        {
-            if (reserwationManage == null)
-            {
-                reserwationManage = new ReserwationManage(MyController, this);
-            }
-            contentControl.Content = reserwationManage;
-        }
+        //private void ReservationsButtonClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (reserwationManage == null)
+        //    {
+        //        reserwationManage = new ReserwationManage(MyController, this);
+        //    }
+        //    contentControl.Content = reserwationManage;
+        //}
 
-        private void CarsButtonClicked(object sender, RoutedEventArgs e)
-        {
-            if (carManage == null)
-            {
-                carManage = new CarManage(MyController, this);
-            }
-            contentControl.Content = carManage;
-        }
+        //private void CarsButtonClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (carManage == null)
+        //    {
+        //        carManage = new CarManage(MyController, this);
+        //    }
+        //    contentControl.Content = carManage;
+        //}
 
-        private void MarksButtonCliced(object sender, RoutedEventArgs e)
-        {
-            if (carMarkManage == null)
-            {
-                carMarkManage = new CarMarkManage(MyController, this);
-            }
-            contentControl.Content = carMarkManage;
-        }
+        //private void MarksButtonCliced(object sender, RoutedEventArgs e)
+        //{
+        //    if (carMarkManage == null)
+        //    {
+        //        carMarkManage = new CarMarkManage(MyController, this);
+        //    }
+        //    contentControl.Content = carMarkManage;
+        //}
 
-        private void ModelsButtonClicked(object sender, RoutedEventArgs e)
-        {
-            if (carModelManage == null)
-            {
-                carModelManage = new CarModelManage(MyController, this);
-            }
-            contentControl.Content = carModelManage;
-        }
+        //private void ModelsButtonClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (carModelManage == null)
+        //    {
+        //        carModelManage = new CarModelManage(MyController, this);
+        //    }
+        //    contentControl.Content = carModelManage;
+        //}
 
-        private void UserButtonClicked(object sender, RoutedEventArgs e)
-        {
-            if (userManage == null)
-            {
-                userManage = new UserManage(MyController, this);
-            }
-            contentControl.Content = userManage;
-        }
+        //private void UserButtonClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (userManage == null)
+        //    {
+        //        userManage = new UserManage(MyController, this);
+        //    }
+        //    contentControl.Content = userManage;
+        //}
 
-        private void AppSetingsClicked(object sender, RoutedEventArgs e)
-        {
-            if (appSettings == null)
-            {
-                appSettings = new AppSettings(MyController);
-            }
-            contentControl.Content = appSettings;
-        }
+        //private void AppSetingsClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (appSettings == null)
+        //    {
+        //        appSettings = new AppSettings(MyController);
+        //    }
+        //    contentControl.Content = appSettings;
+        //}
 
         private void LogoutClicked(object sender, RoutedEventArgs e)
         {
@@ -215,6 +218,87 @@ namespace kck_projekt.Wpf
         private void ExitClicked(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            {
+                case "ItemReservations":
+                    if (reserwationManage == null)
+                    {
+                        reserwationManage = new ReserwationManage(MyController, this);
+                    }
+                    contentControl.Content = reserwationManage;
+                    break;
+                case "ItemCars":
+                    if (carManage == null)
+                    {
+                        carManage = new CarManage(MyController, this);
+                    }
+                    contentControl.Content = carManage;
+                    break;
+                case "ItemMarks":
+                    if (carMarkManage == null)
+                    {
+                        carMarkManage = new CarMarkManage(MyController, this);
+                    }
+                    contentControl.Content = carMarkManage;
+                    break;
+                case "ItemModels":
+                    if (carModelManage == null)
+                    {
+                        carModelManage = new CarModelManage(MyController, this);
+                    }
+                    contentControl.Content = carModelManage;
+                    break;
+                case "ItemUsers":
+                    if (userManage == null)
+                    {
+                        userManage = new UserManage(MyController, this);
+                    }
+                    contentControl.Content = userManage;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GridMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void LogoutButtonClick(object sender, RoutedEventArgs e)
+        {
+            MyController.Logout();
+            Application.Current.Shutdown();
+        }
+
+        private void ExitButtonClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void SetingsButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (appSettings == null)
+            {
+                appSettings = new AppSettings(MyController);
+            }
+            contentControl.Content = appSettings;
         }
     }
 }

@@ -72,6 +72,7 @@ namespace kck_projekt.Wpf
         public void ShowMessage(string text)
         {
             MessageBox.Show(text, "Uwaga");
+
         }
 
         public void ShowMenu()

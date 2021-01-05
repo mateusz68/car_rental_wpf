@@ -25,21 +25,18 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-        <TextBox Margin="5" Name="txtFilter" TextChanged="txtFilter_TextChanged" />
 
         <ListView Margin="3" Name="reservationList" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Użytkownik" Width="auto" DisplayMemberBinding="{Binding User}" />
-                    <GridViewColumn Header="Samochód" Width="auto" DisplayMemberBinding="{Binding Car}" />
-                    <GridViewColumn Header="Samochód" Width="auto" DisplayMemberBinding="{Binding DateFrom}" />
-                    <GridViewColumn Header="Samochód" Width="auto" DisplayMemberBinding="{Binding DateTo}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        </StackPanel>
-        <!--<ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Użytkownik" Width="auto" DisplayMemberBinding="{Binding User}" />
+                        <GridViewColumn Header="Samochód" Width="auto" DisplayMemberBinding="{Binding Car}" />
+                        <GridViewColumn Header="Od" Width="auto" DisplayMemberBinding="{Binding DateFrom}" />
+                        <GridViewColumn Header="Do" Width="auto" DisplayMemberBinding="{Binding DateTo}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!--<ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
         </ListBox>-->
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
