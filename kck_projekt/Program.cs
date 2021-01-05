@@ -42,7 +42,7 @@ namespace kck_projekt
             ViewInterface view;
             Model.AppContext model = new Model.AppContext();
 
-            if (true)
+            if (false)
             {
                 view = new View.AppView();
             }

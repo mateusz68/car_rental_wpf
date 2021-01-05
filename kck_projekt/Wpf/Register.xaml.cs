@@ -31,5 +31,15 @@ namespace kck_projekt.Wpf
         {
             Close();
         }
+
+        private void mouseLeftClicked(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void closeBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

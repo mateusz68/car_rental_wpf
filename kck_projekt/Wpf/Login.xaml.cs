@@ -42,13 +42,23 @@ namespace kck_projekt.Wpf
         {
             if ((bool)rememberCheckBox.IsChecked)
             {
-                MyController.LoginUser(emailTextBox.Text.ToString(), passwordBox.Password.ToString(), true);
+                MyController.LoginUser(loginBox.Text.ToString(), passwordBox.Password.ToString(), true);
             }
             else
             {
-                MyController.LoginUser(emailTextBox.Text.ToString(), passwordBox.Password.ToString(), false);
+                MyController.LoginUser(loginBox.Text.ToString(), passwordBox.Password.ToString(), false);
             }
             
+        }
+
+        private void mouseLeftClicked(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void closeBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
