@@ -193,6 +193,9 @@
     <Compile Include="Wpf\CarAvailableList.xaml.cs">
       <DependentUpon>CarAvailableList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\CarDatesWindow.xaml.cs">
+      <DependentUpon>CarDatesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\CarManage.xaml.cs">
       <DependentUpon>CarManage.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,12 @@
     <Compile Include="Wpf\HelpMethod.cs" />
     <Compile Include="Wpf\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\MakeReservation.xaml.cs">
+      <DependentUpon>MakeReservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wpf\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -265,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Wpf\CarDatesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Wpf\CarManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -278,6 +291,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wpf\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\MakeReservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

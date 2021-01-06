@@ -21,10 +21,11 @@ namespace kck_projekt.Wpf
     public partial class CarAvailableList : UserControl
     {
         private UserMenu userMenu;
-        public CarAvailableList(UserMenu userMenu)
+        private Controller.AppController MyController { get; set; }
+        public CarAvailableList(Controller.AppController MyController, UserMenu userMenu)
         {
             InitializeComponent();
-
+            this.MyController = MyController;
             this.userMenu = userMenu;
         }
 
@@ -46,6 +47,19 @@ namespace kck_projekt.Wpf
         {
             rentButton.IsEnabled = false;
             availableButton.IsEnabled = false;
+        }
+
+        private void AvaliableButtonClick(object sender, RoutedEventArgs e)
+        {
+            CarDatesWindow carDatesWindow = new CarDatesWindow(MyController, userMenu.ObservableCar[carList.SelectedIndex].CarId);
+            carDatesWindow.Owner = userMenu;
+            carDatesWindow.ShowDialog();
+
+        }
+
+        private void RentCarButtonClick(object sender, RoutedEventArgs e)
+        {
+            userMenu.showReservationWindow(userMenu.ObservableCar[carList.SelectedIndex].CarId);
         }
     }
 }

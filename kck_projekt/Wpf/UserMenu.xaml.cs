@@ -28,6 +28,7 @@ namespace kck_projekt.Wpf
         private UserRentHistory rentHistory;
         private AppSettings appSettings;
         private CarAvailableList carAvailableList;
+        private MakeReservation makeReservation;
         private Model.User currentUser;
         #region define observable collections
         private ObservableCollection<Model.Car> observableCar;
@@ -79,7 +80,6 @@ namespace kck_projekt.Wpf
             ObservableUserReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetUserReservation(currentUser.UserId));
         }
 
-
         public void UpdateUserReservation()
         {
             ObservableUserReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetUserReservation(currentUser.UserId));
@@ -112,9 +112,9 @@ namespace kck_projekt.Wpf
                     contentControl.Content = rentHistory;
                     break;
                 case "ItemCar":
-                    if (rentHistory == null)
+                    if (carAvailableList == null)
                     {
-                        carAvailableList = new CarAvailableList(this);
+                        carAvailableList = new CarAvailableList(MyController,this);
                     }
                     contentControl.Content = carAvailableList;
                     break;
@@ -152,6 +152,28 @@ namespace kck_projekt.Wpf
                 appSettings = new AppSettings(MyController);
             }
             contentControl.Content = appSettings;
+        }
+
+        public void showReservationWindow(int carId)
+        {
+            if (makeReservation == null)
+            {
+                makeReservation = new MakeReservation(MyController,this,carId);
+            }
+            contentControl.Content = makeReservation;
+        }
+
+        public void closeReservationWindow()
+        {
+            if (carAvailableList == null)
+            {
+                carAvailableList = new CarAvailableList(MyController, this);
+            }
+            contentControl.Content = carAvailableList;
+            if (makeReservation != null)
+            {
+                makeReservation = null;
+            }
         }
     }
 }
