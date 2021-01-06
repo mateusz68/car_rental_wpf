@@ -163,9 +163,9 @@
       
             </Grid>
             <StackPanel Grid.Row="2">
-                <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>
-                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5" Padding="5,10">Usuń</Button>
-                <Button Name="addButton" Click="addBtnClicked" Margin="5" Padding="5,10">Dodaj</Button>
+                <Button Name="saveButton" Click="saveBtnClicked" Margin="5">Zapisz</Button>
+                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5">Usuń</Button>
+                <Button Name="addButton" Click="addBtnClicked" Margin="5">Dodaj</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

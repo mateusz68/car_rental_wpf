@@ -8,11 +8,10 @@
              Title="Menu" Height="600" Width="1080"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -43,7 +42,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1B3861">
             <StackPanel>
-                <Grid Height="150" Background="Orange">
+                <Grid Height="150" Background="DeepSkyBlue">
                     <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
                         <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
                     </Button>
@@ -98,6 +97,11 @@
                     <materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                         <StackPanel Width="150">
                             <Button Content="Ustawienia" Click="SetingsButtonClick"/>
+                            <StackPanel>
+                                <Label Content="Tryb Ciemny" HorizontalAlignment="Center"/>
+                                <ToggleButton x:Name="DarkModeToggleButton" 
+                                                  Click="MenuDarkModeButton_Click"/>
+                            </StackPanel>
                             <Separator/>
                             <Button Content="Wyloguj" Click="LogoutButtonClick"/>
                             <Button Content="Wyjdź" Click="ExitButtonClick"/>

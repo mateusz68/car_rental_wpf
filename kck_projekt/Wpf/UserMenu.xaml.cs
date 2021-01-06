@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class UserMenu : Window
     {
+        private readonly PaletteHelper _paletteHelper = new PaletteHelper();
+
         public Controller.AppController MyController { get; set; }
         public Wpf.WindowManager WindowManager { get; set; }
         private UserRentHistory rentHistory;
@@ -71,6 +74,19 @@ namespace kck_projekt.Wpf
             currentUser = windowManager.user;
             LoadData();
             userName.Text = currentUser.UserName;
+
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+
+            DarkModeToggleButton.IsChecked = theme.GetBaseTheme() == BaseTheme.Dark;
+
+            //if (paletteHelper.GetThemeManager() is  themeManager)
+            //{
+            //    themeManager.ThemeChanged += (_, e) =>
+            //    {
+            //        DarkModeToggleButton.IsChecked = e.NewTheme?.GetBaseTheme() == BaseTheme.Dark;
+            //    };
+            //}
         }
 
         #region load and update data
@@ -86,6 +102,20 @@ namespace kck_projekt.Wpf
         }
 
         #endregion
+
+
+        private void MenuDarkModeButton_Click(object sender, RoutedEventArgs e)
+            => ModifyTheme(DarkModeToggleButton.IsChecked == true);
+
+        private static void ModifyTheme(bool isDarkTheme)
+        {
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+
+            theme.SetBaseTheme(isDarkTheme ? Theme.Dark : Theme.Light);
+
+            paletteHelper.SetTheme(theme);
+        }
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {

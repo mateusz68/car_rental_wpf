@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -24,6 +25,7 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class StaffMenu : Window, INotifyPropertyChanged
     {
+        private readonly PaletteHelper _paletteHelper = new PaletteHelper();
         private CarManage carManage;
         private ReserwationManage reserwationManage;
         private CarMarkManage carMarkManage;
@@ -110,6 +112,11 @@ namespace kck_projekt.Wpf
                 ItemUsers.IsEnabled = true;
             }
 
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+
+            DarkModeToggleButton.IsChecked = theme.GetBaseTheme() == BaseTheme.Dark;
+
         }
 
         #region update and load data
@@ -155,59 +162,18 @@ namespace kck_projekt.Wpf
 
         #endregion
 
-        //private void ReservationsButtonClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if (reserwationManage == null)
-        //    {
-        //        reserwationManage = new ReserwationManage(MyController, this);
-        //    }
-        //    contentControl.Content = reserwationManage;
-        //}
+        private void MenuDarkModeButton_Click(object sender, RoutedEventArgs e)
+              => ModifyTheme(DarkModeToggleButton.IsChecked == true);
 
-        //private void CarsButtonClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if (carManage == null)
-        //    {
-        //        carManage = new CarManage(MyController, this);
-        //    }
-        //    contentControl.Content = carManage;
-        //}
+        private static void ModifyTheme(bool isDarkTheme)
+        {
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
 
-        //private void MarksButtonCliced(object sender, RoutedEventArgs e)
-        //{
-        //    if (carMarkManage == null)
-        //    {
-        //        carMarkManage = new CarMarkManage(MyController, this);
-        //    }
-        //    contentControl.Content = carMarkManage;
-        //}
+            theme.SetBaseTheme(isDarkTheme ? Theme.Dark : Theme.Light);
 
-        //private void ModelsButtonClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if (carModelManage == null)
-        //    {
-        //        carModelManage = new CarModelManage(MyController, this);
-        //    }
-        //    contentControl.Content = carModelManage;
-        //}
-
-        //private void UserButtonClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if (userManage == null)
-        //    {
-        //        userManage = new UserManage(MyController, this);
-        //    }
-        //    contentControl.Content = userManage;
-        //}
-
-        //private void AppSetingsClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if (appSettings == null)
-        //    {
-        //        appSettings = new AppSettings(MyController);
-        //    }
-        //    contentControl.Content = appSettings;
-        //}
+            paletteHelper.SetTheme(theme);
+        }
 
         private void LogoutClicked(object sender, RoutedEventArgs e)
         {

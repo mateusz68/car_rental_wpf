@@ -6,17 +6,22 @@
              xmlns:local="clr-namespace:kck_projekt.Wpf"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d" 
              SizeToContent="Height" Width="450" MaxHeight="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <StackPanel Background="LightGray">
-        <Border Background="#FF31577E">
+    <StackPanel >
+        <Border Background="Purple">
             <StackPanel  MouseLeftButtonDown="MouseLeftClicked" HorizontalAlignment="Right">
                 <Button Click="CloseButtonClick">
                     <materialDesign:PackIcon Width="20" Height="20" Kind="WindowClose"/>
                 </Button>
             </StackPanel>
         </Border>
-        <Border Background="White" Margin="2" CornerRadius="5">
+        <Border Background="{DynamicResource MaterialDesignBackground}" Margin="2" CornerRadius="5">
             <StackPanel>
                 <Label Content="{Binding Message}" FontSize="16" HorizontalAlignment="Center"/>
                 <Button Margin="5" Content="Zamknij" Click="CloseButtonClick" IsDefault="True" MaxWidth="100"/>

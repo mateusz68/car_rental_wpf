@@ -7,11 +7,10 @@
              mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
     d:DesignHeight="600" d:DesignWidth="1080"  WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
@@ -94,6 +93,11 @@
                     <materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                         <StackPanel Width="150">
                             <Button Content="Ustawienia" Click="SettingsButttonClick"/>
+                            <StackPanel>
+                                <Label Content="Tryb Ciemny" HorizontalAlignment="Center"/>
+                                <ToggleButton x:Name="DarkModeToggleButton" 
+                                                  Click="MenuDarkModeButton_Click"/>
+                            </StackPanel>
                             <Separator/>
                             <Button Content="Wyloguj" Click="LogoutButtonClick"/>
                             <Button Content="Wyjdź" Click="ExitButtonClick"/>
