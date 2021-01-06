@@ -28,15 +28,13 @@
         <ListView Margin="3" Name="reservationList" ItemsSource="{Binding ObservableUserReservation, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Od" Width="auto" DisplayMemberBinding="{Binding DateFrom}" />
-                    <GridViewColumn Header="Do" Width="auto" DisplayMemberBinding="{Binding DateTo}" />
+                    <GridViewColumn Header="Od" Width="auto" DisplayMemberBinding="{Binding DateFrom, StringFormat={}{0:dd.MM.yy HH:MM}, ConverterCulture=pl-PL}" />
+                    <GridViewColumn Header="Do" Width="auto" DisplayMemberBinding="{Binding DateTo, StringFormat={}{0:dd.MM.yy HH:MM}, ConverterCulture=pl-PL}" />
                     <GridViewColumn Header="Model Samochodu" Width="auto" DisplayMemberBinding="{Binding Car.Model}" />
                     <GridViewColumn Header="Numer Rejestracyjny" Width="auto" DisplayMemberBinding="{Binding Car.CarRegNumb}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--<ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
-        </ListBox>-->
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 
@@ -75,26 +73,12 @@
                 <Label Grid.Row="3" Grid.Column="0" Margin="5">Koszt</Label>
                 <TextBox Name="Cost" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ElementName=reservationList, Path=SelectedItem.Cost}" IsReadOnly="True" />
                 <Label Grid.Row="4" Grid.Column="0" Margin="5">Status</Label>
-                <!--<ComboBox Name="StatusCombo" Grid.Row="4" Grid.Column="1" IsReadOnly="True" Margin="5" ItemsSource="{Binding Source={StaticResource statusFromEnum}}" SelectedItem="{Binding ElementName=reservationList, Path=SelectedItem.Status}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>-->
                 <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True" Margin="5" Text="{Binding ElementName=reservationList, Path=SelectedItem.Status, Converter={StaticResource enumDescriptionConverter}}"/>
 
                 <Label Grid.Row="5" Grid.Column="0" Margin="5">Samochód</Label>
-                <!--<ComboBox Name="CarCombo" Grid.Row="6" Grid.Column="1" Margin="5" IsReadOnly="True" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding ElementName=reservationList, Path=SelectedItem.Car}"/>-->
-                <!--<TextBox Grid.Row="5" Grid.Column="1" IsReadOnly="True" Margin="5" Text="{Binding ElementName=reservationList, Path=SelectedItem.Car}"/>-->
-                <Label Grid.Row="5" Grid.Column="1" Margin="5" Content="{Binding ElementName=reservationList, Path=SelectedItem.Car}"></Label>
+                <TextBox Grid.Row="5" Grid.Column="1" IsReadOnly="True" Margin="5" Text="{Binding ElementName=reservationList, Mode=OneWay,  Path=SelectedItem.Car}"/>
 
             </Grid>
-            <!--<StackPanel Grid.Row="2">
-                <Button Name="saveButton" Click="saveBtnClicked" Margin="5">Zapisz</Button>
-                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5">Usuń</Button>
-                <Button Name="addButton" Click="addBtnClicked" Margin="5">Dodaj</Button>
-            </StackPanel>-->
         </StackPanel>
     </Grid>
 </UserControl>

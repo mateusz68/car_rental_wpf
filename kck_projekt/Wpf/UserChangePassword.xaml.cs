@@ -44,22 +44,22 @@ namespace kck_projekt.Wpf
         {
             if (String.IsNullOrEmpty(OldPassword.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole imię nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole imię nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(NewPassword.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole imię nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole imię nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(NewPasswordRepeat.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole imię nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole imię nie może być puste!");
                 return false;
             }
             if(NewPassword.Text != OldPassword.Text)
             {
-                userMenu.windowManager.ShowMessage("Nowe hasła się nie są takie same!");
+                userMenu.WindowManager.ShowMessage("Nowe hasła się nie są takie same!");
                 return false;
             }
             return true;

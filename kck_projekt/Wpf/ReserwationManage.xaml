@@ -27,19 +27,16 @@
         </Grid.ColumnDefinitions>
 
         <ListView Margin="3" Name="reservationList" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Użytkownik" Width="auto" DisplayMemberBinding="{Binding User.Email}" />
-                    <GridViewColumn Header="Od" Width="auto" DisplayMemberBinding="{Binding DateFrom}" />
-                    <GridViewColumn Header="Do" Width="auto" DisplayMemberBinding="{Binding DateTo}" />
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Użytkownik" Width="auto" DisplayMemberBinding="{Binding User.Email}" />
+                    <GridViewColumn Header="Od" Width="auto" DisplayMemberBinding="{Binding DateFrom, StringFormat={}{0:dd.MM.yy HH:MM}, ConverterCulture=pl-PL}" />
+                    <GridViewColumn Header="Do" Width="auto" DisplayMemberBinding="{Binding DateTo, StringFormat={}{0:dd.MM.yy HH:MM}, ConverterCulture=pl-PL}" />
                     <GridViewColumn Header="Model Samochodu" Width="auto" DisplayMemberBinding="{Binding Car.Model}" />
                     <GridViewColumn Header="Numer Rejestracyjny" Width="auto" DisplayMemberBinding="{Binding Car.CarRegNumb}" />
                 </GridView>
-                </ListView.View>
-            </ListView>
-            <!--<ListBox Margin="3" Name="reservationList" SelectionMode="Single" SelectionChanged="reservationSelectionChanged" ItemsSource="{Binding ObservableReservations, UpdateSourceTrigger=PropertyChanged}">
-        </ListBox>-->
-
+            </ListView.View>
+        </ListView>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 
         <StackPanel Grid.Column="2">

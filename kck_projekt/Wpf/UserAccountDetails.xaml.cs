@@ -37,37 +37,37 @@ namespace kck_projekt.Wpf
             int tempInt;
             if (String.IsNullOrEmpty(NameTextBox.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole imię nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole imię nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(userSurname.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole nazwisko nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole nazwisko nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(userAdres1.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole ulica nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole ulica nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(userAdres2.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole miejscowość nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole miejscowość nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(userAdres3.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole kod pocztowy nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole kod pocztowy nie może być puste!");
                 return false;
             }
             if (String.IsNullOrEmpty(userPhone.Text))
             {
-                userMenu.windowManager.ShowMessage("Pole numer telefonu nie może być puste!");
+                userMenu.WindowManager.ShowMessage("Pole numer telefonu nie może być puste!");
                 return false;
             }
             if (!Int32.TryParse(userPhone.Text, out tempInt))
             {
-                userMenu.windowManager.ShowMessage("Błędny numer telefonu!");
+                userMenu.WindowManager.ShowMessage("Błędny numer telefonu!");
                 return false;
             }
             return true;

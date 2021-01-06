@@ -24,9 +24,10 @@ namespace kck_projekt.Wpf
     public partial class UserMenu : Window
     {
         public Controller.AppController MyController { get; set; }
-        public Wpf.WindowManager windowManager { get; set; }
+        public Wpf.WindowManager WindowManager { get; set; }
         private UserRentHistory rentHistory;
         private AppSettings appSettings;
+        private CarAvailableList carAvailableList;
         private Model.User currentUser;
         #region define observable collections
         private ObservableCollection<Model.Car> observableCar;
@@ -65,7 +66,7 @@ namespace kck_projekt.Wpf
             InitializeComponent();
             this.MyController = MyController;
             DataContext = this;
-            this.windowManager = windowManager;
+            this.WindowManager = windowManager;
             currentUser = windowManager.user;
             LoadData();
             userName.Text = currentUser.UserName;
@@ -109,6 +110,13 @@ namespace kck_projekt.Wpf
                         rentHistory = new UserRentHistory();
                     }
                     contentControl.Content = rentHistory;
+                    break;
+                case "ItemCar":
+                    if (rentHistory == null)
+                    {
+                        carAvailableList = new CarAvailableList(this);
+                    }
+                    contentControl.Content = carAvailableList;
                     break;
                 case "ItemAccount":
                     contentControl.Content = new UserAccountDetails(MyController, currentUser, this);
