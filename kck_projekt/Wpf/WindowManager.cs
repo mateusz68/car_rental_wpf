@@ -71,7 +71,10 @@ namespace kck_projekt.Wpf
 
         public void ShowMessage(string text)
         {
-            MessageBox.Show(text, "Uwaga");
+            //MessageBox.Show(text, "Uwaga");
+            MessageWindow messageWindow = new MessageWindow(text);
+            messageWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            messageWindow.ShowDialog();
 
         }
 
