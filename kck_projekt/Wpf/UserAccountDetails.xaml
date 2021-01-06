@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="kck_projekt.Wpf.UserAccountDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kck_projekt.Wpf"
+             mc:Ignorable="d" 
+             
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Margin="5">
+            <TextBox Margin="20,10" Name="userEmail" Text="{Binding EditUser.Email}" materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+
+            <TextBox Margin="20,10" Name="NameTextBox" materialDesign:HintAssist.Hint="Imię" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Name">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Margin="20,10" Name="userSurname" materialDesign:HintAssist.Hint="Nazwisko" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Surname">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Margin="20,10" Name="userAdres1" materialDesign:HintAssist.Hint="Ulica" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Adres1">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Margin="20,10" Name="userAdres2" materialDesign:HintAssist.Hint="Miejscowość" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Adres2">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Margin="20,10" Name="userAdres3" materialDesign:HintAssist.Hint="Kod Pocztowy" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Adres3">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Margin="20,10" Name="userPhone" materialDesign:HintAssist.Hint="Numer Telefonu:" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="EditUser.Phone">
+                        <Binding.ValidationRules>
+                            <local:EmptyStringValidationRule />
+                            <local:NumberValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Button Margin="20,10" Content="Zapisz" Click="SaveButtonClick" MaxWidth="100"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

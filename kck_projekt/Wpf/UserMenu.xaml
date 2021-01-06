@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}"
-    d:DesignHeight="600" d:DesignWidth="1080"  WindowStartupLocation="CenterScreen" WindowStyle="None">
+    d:DesignHeight="600" d:DesignWidth="1080"  WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -44,7 +44,7 @@
 
         <Grid Grid.Column="0" x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1B3861">
             <StackPanel>
-                <Grid Height="150" Background="White">
+                <Grid Height="150" Background="DeepSkyBlue">
                     <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
                         <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
                     </Button>

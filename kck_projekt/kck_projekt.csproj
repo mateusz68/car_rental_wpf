@@ -212,6 +212,12 @@
     <Compile Include="Wpf\StaffMenu.xaml.cs">
       <DependentUpon>StaffMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\UserAccountDetails.xaml.cs">
+      <DependentUpon>UserAccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\UserChangePassword.xaml.cs">
+      <DependentUpon>UserChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\UserManage.xaml.cs">
       <DependentUpon>UserManage.xaml</DependentUpon>
     </Compile>
@@ -277,6 +283,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wpf\StaffMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\UserAccountDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\UserChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

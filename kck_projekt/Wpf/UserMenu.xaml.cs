@@ -110,6 +110,12 @@ namespace kck_projekt.Wpf
                     }
                     contentControl.Content = rentHistory;
                     break;
+                case "ItemAccount":
+                    contentControl.Content = new UserAccountDetails(MyController, currentUser, this);
+                    break;
+                case "ItemPassword":
+                    contentControl.Content = new UserChangePassword(MyController, currentUser, this);
+                    break;
                 default:
                     break;
             }
