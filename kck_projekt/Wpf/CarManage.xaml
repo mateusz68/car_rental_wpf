@@ -32,13 +32,22 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="3" Name="carList" SelectionMode="Single" SelectionChanged="carSelectionChanged" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}">
-        </ListBox>
+        <ListView Margin="3" Name="carList" SelectionChanged="carSelectionChanged" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Numer Rejestracyjny" DisplayMemberBinding="{Binding CarRegNumb}" />
+                    <GridViewColumn Header="Kolor" DisplayMemberBinding="{Binding CarColor}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<ListBox Margin="3" Name="carList" SelectionMode="Single" SelectionChanged="carSelectionChanged" ItemsSource="{Binding ObservableCar, UpdateSourceTrigger=PropertyChanged}">
+        </ListBox>-->
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 

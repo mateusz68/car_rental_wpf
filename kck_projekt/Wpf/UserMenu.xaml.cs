@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -23,14 +25,66 @@ namespace kck_projekt.Wpf
     {
         public Controller.AppController MyController { get; set; }
         public Wpf.WindowManager windowManager { get; set; }
+        private UserRentHistory rentHistory;
+        private AppSettings appSettings;
+        private Model.User currentUser;
+        #region define observable collections
+        private ObservableCollection<Model.Car> observableCar;
+        public ObservableCollection<Model.Car> ObservableCar
+        {
+            get { return observableCar; }
+            set
+            {
+                observableCar = value;
+                NotifyPropertyChanged("ObservableCar");
+            }
+        }
+
+        private ObservableCollection<Model.Reservation> observableUserReservation;
+        public ObservableCollection<Model.Reservation> ObservableUserReservation
+        {
+            get { return observableUserReservation; }
+            set
+            {
+                observableUserReservation = value;
+                NotifyPropertyChanged("ObservableUserReservation");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        #endregion
         public UserMenu(Controller.AppController MyController, Wpf.WindowManager windowManager)
         {
             InitializeComponent();
             this.MyController = MyController;
             DataContext = this;
             this.windowManager = windowManager;
-            userName.Text = windowManager.user.UserName;
+            currentUser = windowManager.user;
+            LoadData();
+            userName.Text = currentUser.UserName;
         }
+
+        #region load and update data
+        public void LoadData()
+        {
+            ObservableCar = new ObservableCollection<Model.Car>(MyController.manageCars.GetAvaliableCarList());
+            ObservableUserReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetUserReservation(currentUser.UserId));
+        }
+
+
+        public void UpdateUserReservation()
+        {
+            ObservableUserReservation = new ObservableCollection<Model.Reservation>(MyController.manageReservation.GetUserReservation(currentUser.UserId));
+        }
+
+        #endregion
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -46,14 +100,15 @@ namespace kck_projekt.Wpf
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserControl usc;
-            GridMain.Children.Clear();
+            
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
-                case "ItemAppSetings":
-                    usc = new AppSettings(MyController);
-                    GridMain.Children.Add(usc);
-                    Debug.WriteLine("If");
+                case "ItemUserRentHistory":
+                    if (rentHistory == null)
+                    {
+                        rentHistory = new UserRentHistory();
+                    }
+                    contentControl.Content = rentHistory;
                     break;
                 default:
                     break;
@@ -74,6 +129,15 @@ namespace kck_projekt.Wpf
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void SettingsButttonClick(object sender, RoutedEventArgs e)
+        {
+            if (appSettings == null)
+            {
+                appSettings = new AppSettings(MyController);
+            }
+            contentControl.Content = appSettings;
         }
     }
 }

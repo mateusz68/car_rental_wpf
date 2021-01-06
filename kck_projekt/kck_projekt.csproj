@@ -218,6 +218,9 @@
     <Compile Include="Wpf\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\UserRentHistory.xaml.cs">
+      <DependentUpon>UserRentHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\ValidationRules.cs" />
     <Compile Include="Wpf\WindowManager.cs" />
   </ItemGroup>
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wpf\UserMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\UserRentHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

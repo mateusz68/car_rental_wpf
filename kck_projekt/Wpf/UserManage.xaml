@@ -20,13 +20,23 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="3" Name="userList" SelectionMode="Single" SelectionChanged="userSelectionChanged" ItemsSource="{Binding ObservableUsers, UpdateSourceTrigger=PropertyChanged}">
-        </ListBox>
+        <!--<ListBox Margin="3" Name="userList" SelectionMode="Single" SelectionChanged="userSelectionChanged" ItemsSource="{Binding ObservableUsers, UpdateSourceTrigger=PropertyChanged}">
+        </ListBox>-->
+        <ListView Margin="3" Name="userList" SelectionChanged="userSelectionChanged" ItemsSource="{Binding ObservableUsers, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Login" Width="auto" DisplayMemberBinding="{Binding UserName}" />
+                    <GridViewColumn Header="Email" Width="auto" DisplayMemberBinding="{Binding Email}" />
+                    <GridViewColumn Header="Imię" Width="auto" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Nazwisko" Width="auto" DisplayMemberBinding="{Binding Surname}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 

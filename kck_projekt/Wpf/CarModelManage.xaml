@@ -9,12 +9,21 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="3" Name="carModelList" SelectionMode="Single" SelectionChanged="carModelSelectionChanged" ItemsSource="{Binding ObservableCarModel, UpdateSourceTrigger=PropertyChanged}">
-        </ListBox>
+       <!--<ListBox Margin="3" Name="carModelList" SelectionMode="Single" SelectionChanged="carModelSelectionChanged" ItemsSource="{Binding ObservableCarModel, UpdateSourceTrigger=PropertyChanged}">
+        </ListBox>-->
+        <ListView Margin="3" Name="carModelList" SelectionChanged="carModelSelectionChanged" ItemsSource="{Binding ObservableCarModel, UpdateSourceTrigger=PropertyChanged}">
+            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Marka" Width="auto" DisplayMemberBinding="{Binding Mark}"/>
+                        <GridViewColumn Header="Model" Width="auto" DisplayMemberBinding="{Binding ModelName}" />
+                    </GridView>
+            </ListView.View>
+        </ListView>
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
 
@@ -49,9 +58,9 @@
 
             </Grid>
             <StackPanel Grid.Row="2">
-                <Button Name="saveButton" Click="saveBtnClicked" Margin="5" Padding="5,10">Zapisz</Button>
-                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5" Padding="5,10">Usuń</Button>
-                <Button Name="addButton" Click="addBtnClicked" Margin="5" Padding="5,10">Dodaj</Button>
+                <Button Name="saveButton" Click="saveBtnClicked" Margin="5">Zapisz</Button>
+                <Button Name="deleteButton" Click="deleteBtnclicked" Margin="5">Usuń</Button>
+                <Button Name="addButton" Click="addBtnClicked" Margin="5">Dodaj</Button>
             </StackPanel>
 
         </StackPanel>

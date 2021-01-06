@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="600" d:DesignWidth="1080" Foreground="White" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    d:DesignHeight="600" d:DesignWidth="1080"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -36,25 +36,13 @@
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid Background="LightGray" MouseDown="GridMouseDown">
-        <Grid x:Name="GridMain" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,60,0,0"/>
-        <Grid Height="60" VerticalAlignment="Top" Background="#FF266EB6">
-            <TextBlock Text="Wypożyczalnia samochodów" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Name="userName" VerticalAlignment="Center" FontSize="18"/>
-                <materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                    <StackPanel Width="150">
-                        <Button Content="Settings"/>
-                        <Button Content="Account"/>
-                        <Separator/>
-                        <Button Content="Wyloguj" Click="LogoutButtonClick"/>
-                        <Button Content="Wyjdź" Click="ExitButtonClick"/>
-                    </StackPanel>
-                </materialDesign:PopupBox>
-                
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1B3861">
+    <Grid MouseDown="GridMouseDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1B3861">
             <StackPanel>
                 <Grid Height="150" Background="White">
                     <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
@@ -65,21 +53,57 @@
                     </Button>
                 </Grid>
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF1368BD" SelectionChanged="ListViewMenu_SelectionChanged">
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="ItemCar" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="Car" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Aktualna Oferta" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemAppSetings" Height="60">
+                    <ListViewItem x:Name="ItemUserRentHistory" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="AppSetings" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="History" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Moje wypożyczenia" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemAccount" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Moje konto" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemPassword" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="PasswordReset" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Zmień Hasło" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>
-        <ContentControl x:Name="contentControl"></ContentControl>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Height="60" VerticalAlignment="Top" Background="#FF266EB6">
+                <TextBlock Text="Wypożyczalnia samochodów" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Name="userName" VerticalAlignment="Center" FontSize="18"/>
+                    <materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                        <StackPanel Width="150">
+                            <Button Content="Ustawienia" Click="SettingsButttonClick"/>
+                            <Separator/>
+                            <Button Content="Wyloguj" Click="LogoutButtonClick"/>
+                            <Button Content="Wyjdź" Click="ExitButtonClick"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+
+            <ContentControl Grid.Row="1" x:Name="contentControl"></ContentControl>
+        </Grid>
     </Grid>
 </Window>
