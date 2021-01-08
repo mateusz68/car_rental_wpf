@@ -76,12 +76,18 @@ namespace kck_projekt.View
                 Y = Pos.Percent(30),
             };
 
-            
+            var settingsButton = new Button("Ustawienia Aplikacji [F5]")
+            {
+                X = Pos.Center() - 10,
+                Y = Pos.Percent(40),
+            };
+
             Add(staffTitle);
             Add(reservationManageButton);
             Add(carManageButton);
             Add(modelManageButton);
             Add(markManageButton);
+            Add(settingsButton);
             #endregion
 
             #region Admin Panel
@@ -106,13 +112,13 @@ namespace kck_projekt.View
             #endregion
 
             #region Logout and Exit Button
-            var exitButton = new Button("Wyjdź [F5]")
+            var exitButton = new Button("Wyjdź [F6]")
             {
                 X = Pos.Percent(50) - 15,
                 Y = Pos.Percent(100) -2,
             };
             Add(exitButton);
-            var logoutButton = new Button("Wyloguj [F6]")
+            var logoutButton = new Button("Wyloguj [F7]")
             {
                 X = Pos.Percent(50) + 5,
                 Y = Pos.Percent(100) - 2,
@@ -165,6 +171,11 @@ namespace kck_projekt.View
                 OnSelect?.Invoke(5);
             };
 
+            settingsButton.Clicked += () =>
+            {
+                OnSelect?.Invoke(6);
+            };
+
             KeyDown += (a) =>
             {
                 switch (a.KeyEvent.Key)
@@ -182,9 +193,12 @@ namespace kck_projekt.View
                         OnSelect?.Invoke(4);
                         break;
                     case Key.F5:
-                        OnExit?.Invoke();
+                        OnSelect?.Invoke(5);
                         break;
                     case Key.F6:
+                        OnExit?.Invoke();
+                        break;
+                    case Key.F7:
                         OnLogout?.Invoke();
                         break;
                     default:

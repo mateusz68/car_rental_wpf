@@ -154,6 +154,7 @@
       <DependentUpon>202011241650006_dodany_koszt.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewInterface.cs" />
+    <Compile Include="View\AppSettings.cs" />
     <Compile Include="View\CarListWindow.cs" />
     <Compile Include="View\MainMenuWindow.cs" />
     <Compile Include="View\CarManageWindow.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -151,6 +152,9 @@ namespace kck_projekt.View
                     case 4:
                         ShowUserSettings();
                         break;
+                    case 5:
+                        ShowAppSettings();
+                        break;
                     default:
                         break;
                 }
@@ -181,6 +185,7 @@ namespace kck_projekt.View
             {
                 Application.RequestStop();
                 Application.Top.Remove(staffMenuWindow);
+                Debug.WriteLine(value);
                 switch (value)
                 {
                     case 1:
@@ -197,6 +202,9 @@ namespace kck_projekt.View
                         break;
                     case 5:
                         ShowUserList();
+                        break;
+                    case 6:
+                        ShowAppSettings();
                         break;
                     default:
                         break;
@@ -319,6 +327,37 @@ namespace kck_projekt.View
             };
             Top = Application.Top;
             Top.Add(userSettingsWindow);
+            Application.Run(Top);
+        }
+
+
+        public void ShowAppSettings()
+        {
+            Debug.WriteLine("Jestem w funkcji");
+            var appSettingsWindow = new AppSettings(null);
+            appSettingsWindow.OnSave = (mode) =>
+            {
+                Application.MainLoop.Invoke(() =>
+                {
+                    if (mode == 0)
+                    {
+                        Controller.AppController.AddOrUpdateAppSettings("interfaceType", "wpf");
+                    }
+                    else
+                    {
+                        Controller.AppController.AddOrUpdateAppSettings("interfaceType", "console");
+                    }
+                    ShowMessage("Ustawienia zapisane!");
+                });
+            };
+            appSettingsWindow.OnBack = () =>
+            {
+                Application.RequestStop();
+                Application.Top.Remove(appSettingsWindow);
+                ShowMenu();
+            };
+            Top = Application.Top;
+            Top.Add(appSettingsWindow);
             Application.Run(Top);
         }
 

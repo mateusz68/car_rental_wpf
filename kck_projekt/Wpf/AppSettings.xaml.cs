@@ -21,7 +21,7 @@ namespace kck_projekt.Wpf
     /// </summary>
     public partial class AppSettings : UserControl
     {
-        public Controller.AppController MyController { get; set; }
+        private Controller.AppController MyController { get; set; }
         public AppSettings(Controller.AppController MyController)
         {
             InitializeComponent();
@@ -38,7 +38,10 @@ namespace kck_projekt.Wpf
             {
                 Controller.AppController.AddOrUpdateAppSettings("interfaceType", "console");
             }
-            MessageBox.Show("Ustawienia zapisane!", "Uwaga");
+            MessageWindow messageWindow = new MessageWindow("Ustawienia zapisane!");
+            messageWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            messageWindow.ShowDialog();
+
         }
 
         private void LoadSettings()

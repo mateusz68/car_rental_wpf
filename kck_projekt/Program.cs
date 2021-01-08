@@ -18,40 +18,19 @@ namespace kck_projekt
         [STAThread]
         static void Main(string[] args)
         {
-            //using(var context = new Model.AppContext())
-            //{
-            //    var user = new User { UserName = "Test201122", UserPassword = "test21010" };
-            //    context.Users.Add(user);
-            //    context.SaveChanges();
-
-            //}
-
-            //using (var context = new Model.AppContext())
-            //{
-            //    var user = context.Users
-            //        .Where(r => r.UserId == 10)
-            //        .First();
-            //    Console.WriteLine(user.UserName);
-            //    Console.ReadLine();
-
-
-            //}
-            //Application.Init();
-            //string mode = ConfigurationManager.AppSettings["mode"];
-            //FreeConsole();
             ViewInterface view;
             Model.AppContext model = new Model.AppContext();
 
-            if (false)
-            {
-                view = new View.AppView();
-            }
-            else
+            string type = ConfigurationManager.AppSettings["interfaceType"];
+            if (type != null && type.Equals("wpf"))
             {
                 FreeConsole();
                 view = new Wpf.WindowManager();
             }
-
+            else
+            {
+                view = new View.AppView();
+            }
             Controller.AppController controller = new Controller.AppController(model, view);
             //View.AppView view = new View.AppView();
 

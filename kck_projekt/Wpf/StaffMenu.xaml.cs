@@ -117,6 +117,8 @@ namespace kck_projekt.Wpf
 
             DarkModeToggleButton.IsChecked = theme.GetBaseTheme() == BaseTheme.Dark;
 
+            reserwationManage = new ReserwationManage(MyController, this);
+            contentControl.Content = reserwationManage;
         }
 
         #region update and load data

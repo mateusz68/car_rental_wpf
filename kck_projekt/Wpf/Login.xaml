@@ -31,7 +31,7 @@
                 <Label Content="Zapamiętaj"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center" Margin="5">
-                <Button Padding="10,5" Click="loginButtonClicked">Zaloguj</Button>
+                <Button Padding="10,5" Click="loginButtonClicked" IsDefault="True">Zaloguj</Button>
                 <Button Padding="10,5" Margin="5,0,5,0" Click="openRegisterWindow">Rejestracja</Button>
                 <Button Padding="10,5" Click="closeWindow">Wyjdź</Button>
             </WrapPanel>

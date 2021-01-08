@@ -12,6 +12,7 @@ namespace kck_projekt.Wpf
     {
         public static MyApp WinApp { get; private set; }
         public static Window MainWindow { get; private set; }
+        private Window loginWindow;
         public Controller.AppController MyController { get; set; }
         private Window currentWindow;
         public Model.User user;
@@ -59,6 +60,7 @@ namespace kck_projekt.Wpf
         public void ShowLogin()
         {
             currentWindow = new Login(MyController);
+            loginWindow = currentWindow;
             //currentWindow.Show();
 
             WinApp.Run(currentWindow);
@@ -67,6 +69,8 @@ namespace kck_projekt.Wpf
         public void CloseWindow()
         {
             currentWindow.Hide();
+            //currentWindow.Close();
+            
         }
 
         public void ShowMessage(string text)
@@ -101,6 +105,11 @@ namespace kck_projekt.Wpf
                 currentWindow = new UserMenu(MyController, this);
                 currentWindow.Show();
             }
+            WinApp.MainWindow = currentWindow;
+            if (loginWindow != null)
+            {
+                loginWindow.Close();
+            }
         }
 
         public void ShowStaffMenu()
@@ -115,6 +124,11 @@ namespace kck_projekt.Wpf
             {
                 currentWindow = new StaffMenu(MyController, this);
                 currentWindow.Show();
+            }
+            WinApp.MainWindow = currentWindow;
+            if (loginWindow != null)
+            {
+                loginWindow.Close();
             }
         }
     }
