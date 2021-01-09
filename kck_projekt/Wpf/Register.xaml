@@ -29,7 +29,7 @@
             <TextBox Margin="20,10" Name="emailTextBox" materialDesign:HintAssist.Hint="Adres Email" materialDesign:HintAssist.Foreground="Green" materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             
             <WrapPanel HorizontalAlignment="Center" Margin="5">
-                <Button Padding="10,5" Margin="0,0,5,0">Zarejestruj</Button>
+                <Button Padding="10,5" Margin="0,0,5,0" Click="RegisterButtonClick">Zarejestruj</Button>
                 <Button Padding="10,5" Click="closeWindow">Anuluj</Button>
             </WrapPanel>
             

@@ -41,5 +41,44 @@ namespace kck_projekt.Wpf
         {
             Close();
         }
+
+        private bool ValidateFields()
+        {
+            if (String.IsNullOrEmpty(loginTextBox.Text))
+            {
+                ShowMessage("Pole login nie może być puste!");
+                return false;
+            }
+            if (String.IsNullOrEmpty(passwordBox.Password))
+            {
+                ShowMessage("Pole hasło nie może być puste!");
+                return false;
+            }
+            if (passwordBox.Password != repeatPasswordBox.Password)
+            {
+                ShowMessage("Hasła nie pasują!");
+                return false;
+            }
+            if (String.IsNullOrEmpty(emailTextBox.Text))
+            {
+                ShowMessage("Pole email nie może być puste!");
+                return false;
+            }
+            return true;
+        }
+        public void ShowMessage(string text)
+        {
+            MessageWindow messageWindow = new MessageWindow(text);
+            messageWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            messageWindow.ShowDialog();
+
+        }
+
+        private void RegisterButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateFields())
+                return;
+            MyController.manageUser.AddUser(loginTextBox.Text, passwordBox.Password, emailTextBox.Text);
+        }
     }
 }

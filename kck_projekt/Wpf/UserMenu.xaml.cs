@@ -87,6 +87,11 @@ namespace kck_projekt.Wpf
             //        DarkModeToggleButton.IsChecked = e.NewTheme?.GetBaseTheme() == BaseTheme.Dark;
             //    };
             //}
+            if (carAvailableList == null)
+            {
+                carAvailableList = new CarAvailableList(MyController, this);
+            }
+            contentControl.Content = carAvailableList;
         }
 
         #region load and update data
