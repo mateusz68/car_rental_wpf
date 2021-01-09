@@ -11,6 +11,6 @@
         <Label Margin="5" Grid.Row="0" Grid.Column="0">Tryb aplikacji:</Label>
         <RadioButton Name="wpfRadio" GroupName="graphicType">Graficzny</RadioButton>
         <RadioButton Name="consoleRadio" GroupName="graphicType">Konsolowy</RadioButton>
-        <Button Margin="5" Click="SaveButtonClicked">Zapisz</Button>
+        <Button Margin="5" Click="SaveButtonClicked" MaxWidth="100">Zapisz</Button>
     </StackPanel>
 </UserControl>

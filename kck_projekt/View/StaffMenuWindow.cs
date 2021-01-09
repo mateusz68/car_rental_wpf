@@ -193,7 +193,7 @@ namespace kck_projekt.View
                         OnSelect?.Invoke(4);
                         break;
                     case Key.F5:
-                        OnSelect?.Invoke(5);
+                        OnSelect?.Invoke(6);
                         break;
                     case Key.F6:
                         OnExit?.Invoke();

@@ -53,22 +53,9 @@ namespace kck_projekt.Wpf
         {
             if(reservationList.SelectedIndex > 0)
             {
-                //Model.Reservation tempReservation = staffMenu.ObservableReservations[reservationList.SelectedIndex];
-                int reservationId = staffMenu.ObservableReservations[reservationList.SelectedIndex].ReservationId;
-                //reservationList.Items.RemoveAt(reservationList.SelectedIndex);
-                Debug.WriteLine(reservationList.SelectedIndex);
-                Debug.WriteLine(reservationList.SelectedItem);
-                //Debug.WriteLine(tempReservation);
-                //staffMenu.ObservableReservations.RemoveAt(reservationList.SelectedIndex);
-                staffMenu.ObservableReservations.RemoveAt(reservationList.SelectedIndex);
-                reservationList.ItemsSource = staffMenu.ObservableReservations;
-                reservationList.Items.Refresh();
-                reservationList.SelectedIndex = -1;
-                //staffMenu.updateReservationList();
-                MyController.manageReservation.DeleteReservation(reservationId);
-                //staffMenu.updateReservationList();
-                //reservationList.ItemsSource = staffMenu.ObservableReservations;
-                //reservationList.Items.Refresh();
+                Model.Reservation reservationItem = staffMenu.ObservableReservations[reservationList.SelectedIndex];
+                staffMenu.ObservableReservations.Remove(reservationItem);
+                MyController.manageReservation.DeleteReservation(reservationItem.ReservationId);
             }
         }
 

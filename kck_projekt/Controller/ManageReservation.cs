@@ -101,7 +101,7 @@ namespace kck_projekt.Controller
             {
                 model.Reservations.Remove(tempReservation);
                 model.SaveChanges();
-                view.ShowMessage("Pomyślnie usunięto rezerwację " + tempReservation);
+                view.ShowMessage("Pomyślnie usunięto rezerwację.");
                 return;
             }
             view.ShowMessage("Nie udało się usunąć rezerwacji.");
