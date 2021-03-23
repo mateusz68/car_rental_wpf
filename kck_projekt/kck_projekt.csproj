@@ -141,18 +141,6 @@
     </Compile>
     <Compile Include="Controller\HelpMethods.cs" />
     <Compile Include="Controller\ManageReservation.cs" />
-    <Compile Include="Migrations\202011191441393_init.cs" />
-    <Compile Include="Migrations\202011191441393_init.designer.cs">
-      <DependentUpon>202011191441393_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011241546326_pola_uzytkownika.cs" />
-    <Compile Include="Migrations\202011241546326_pola_uzytkownika.designer.cs">
-      <DependentUpon>202011241546326_pola_uzytkownika.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011241650006_dodany_koszt.cs" />
-    <Compile Include="Migrations\202011241650006_dodany_koszt.designer.cs">
-      <DependentUpon>202011241650006_dodany_koszt.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewInterface.cs" />
     <Compile Include="View\AppSettings.cs" />
     <Compile Include="View\CarListWindow.cs" />
@@ -252,17 +240,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011191441393_init.resx">
-      <DependentUpon>202011191441393_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011241546326_pola_uzytkownika.resx">
-      <DependentUpon>202011241546326_pola_uzytkownika.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011241650006_dodany_koszt.resx">
-      <DependentUpon>202011241650006_dodany_koszt.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="MyApp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -336,7 +313,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="screenshots\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
